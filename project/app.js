@@ -50,7 +50,6 @@ const getWeatherData = async (
     return data;
   } catch (error) {
     console.log("error", error);
-    // appropriately handle the error
   }
 };
 
@@ -79,7 +78,6 @@ const postData = async (url = "", data = {}) => {
 const updateUI = async () => {
   const request = await fetch("/all");
   try {
-    // Transform into JSON
     const allData = await request.json();
     const last = allData.length - 1;
     document.getElementById("date").innerHTML =
@@ -93,6 +91,5 @@ const updateUI = async () => {
       allData[last].user_response.feelings;
   } catch (error) {
     console.log("error", error);
-    // appropriately handle the error
   }
 };
