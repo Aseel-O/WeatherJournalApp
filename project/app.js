@@ -1,14 +1,14 @@
 /* Global Variables */
-let baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`;
-let apiKey =
+const baseURL = `https://api.openweathermap.org/data/2.5/weather?zip=`;
+const apiKey =
   "&appid=afcc183a26f96dfccf162aceddb1be0d&units=imperial";
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate =
   d.getMonth() +
-  "." +
+  "1" + "/"+
   d.getDate() +
-  "." +
+  "/" +
   d.getFullYear();
 // Event listener to add function to existing HTML DOM element
 document
@@ -28,7 +28,7 @@ function getWeather(e) {
     .then(function (data) {
       postData("/add", {
         temperature: data.main.temp,
-        date: d,
+        date: newDate,
         user_response: user_response,
       });
     })
@@ -79,16 +79,15 @@ const updateUI = async () => {
   const request = await fetch("/all");
   try {
     const allData = await request.json();
-    const last = allData.length - 1;
     document.getElementById("date").innerHTML =
-      allData[last].date;
+      allData.date;
     document.getElementById("temp").innerHTML =
-      Math.round(allData[last].temperature) +
+      Math.round(allData.temperature) +
       "degrees";
     document.getElementById("z").innerHTML =
-      allData[last].user_response.zip_code;
+      allData.user_response.zip_code;
     document.getElementById("feel").innerHTML =
-      allData[last].user_response.feelings;
+      allData.user_response.feelings;
   } catch (error) {
     console.log("error", error);
   }
